@@ -1,5 +1,5 @@
 {
-  "name": "przeslijmi/repaymentPlanner",
+  "name": "przeslijmi/repaymentplanner",
   "description": "PHP Tool to create repayment schedules",
   "version": "v1.0.0",
   "type": "library",
