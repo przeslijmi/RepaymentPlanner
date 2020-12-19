@@ -1,0 +1,15 @@
+{
+  "name": "przeslijmi/repaymentPlanner",
+  "description": "PHP Tool to create repayment schedules",
+  "version": "v1.0.0",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Karol Nowakowski",
+      "email": "przeslijmi@gmail.com"
+    }
+  ],
+  "require": {
+    "php" : "^7.3"
+  }
+}
