@@ -753,34 +753,39 @@ class Schedule extends Flows
     }
 
     /**
-     * Save Schedule into text file.
+     * Deliver Schedule as TXT file.
      *
-     * @param string $fileName Name of the file.
+     * @param null|string $fileName Name of the file - if not given file will not be saved.
      *
-     * @return self
+     * @return string
      */
-    public function toTextFile(string $fileName) : self
+    public function toTextFile(?string $fileName = null) : string
     {
 
-        // Create file and save.
-        file_put_contents($fileName, $this->toString());
+        // Lvd.
+        $contents = $this->toString();
 
-        return $this;
+        // Create file and save.
+        if ($fileName !== null) {
+            file_put_contents($fileName, $contents);
+        }
+
+        return $contents;
     }
 
     /**
-     * Save Schedule into CSV file.
+     * Deliver Schedule as CSV file.
      *
-     * @param string $fileName Name of the file.
+     * @param null|string $fileName Name of the file - if not given file will not be saved.
      *
-     * @return self
+     * @return string
      */
-    public function toCsvFile(string $fileName) : self
+    public function toCsvFile(?string $fileName = null) : string
     {
 
         // Lvd.
         $installments = $this->getInstallments();
-        $result       = 'number,period,start,stop,length,interests,capital,whole' . PHP_EOL;
+        $contents     = 'number,period,start,stop,length,interests,capital,whole' . PHP_EOL;
 
         // Add every calculation.
         foreach ($installments->getAll() as $installment) {
@@ -789,20 +794,22 @@ class Schedule extends Flows
             $period = $installment->getPeriod();
 
             // Add lines.
-            $result .= $installment->getOrder() . ',';
-            $result .= $period->getName() . ',';
-            $result .= $period->getFirstDay()->format('Y-m-d') . ',';
-            $result .= $period->getLastDay()->format('Y-m-d') . ',';
-            $result .= $period->getLength() . ',';
-            $result .= $installment->getInterests() . ',';
-            $result .= $installment->getCapital() . ',';
-            $result .= $installment->getWhole();
-            $result .= PHP_EOL;
+            $contents .= $installment->getOrder() . ',';
+            $contents .= $period->getName() . ',';
+            $contents .= $period->getFirstDay()->format('Y-m-d') . ',';
+            $contents .= $period->getLastDay()->format('Y-m-d') . ',';
+            $contents .= $period->getLength() . ',';
+            $contents .= $installment->getInterests() . ',';
+            $contents .= $installment->getCapital() . ',';
+            $contents .= $installment->getWhole();
+            $contents .= PHP_EOL;
         }
 
         // Create file and save.
-        file_put_contents($fileName, $result);
+        if ($fileName !== null) {
+            file_put_contents($fileName, $contents);
+        }
 
-        return $this;
+        return $contents;
     }
 }

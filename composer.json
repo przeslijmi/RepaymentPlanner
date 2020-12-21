@@ -3,6 +3,7 @@
   "description": "PHP Tool to create repayment schedules",
   "version": "v1.0.0",
   "type": "library",
+  "license": "MIT",
   "authors": [
     {
       "name": "Karol Nowakowski",
